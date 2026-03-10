@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamy/core/constants.dart';
 import 'package:islamy/core/widgets/radio_item.dart';
-import '../../../home/data/models/reciter_model.dart';
+import '../../../home/data/models/reciters_model.dart';
 import '../../../home/presentation/manager/radio_bloc/radio_cubit.dart';
 import '../../../home/presentation/manager/radio_bloc/radio_states.dart';
 

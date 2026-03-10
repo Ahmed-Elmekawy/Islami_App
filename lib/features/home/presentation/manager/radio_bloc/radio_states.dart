@@ -1,5 +1,5 @@
 import '../../../data/models/radio_model.dart';
-import '../../../data/models/reciter_model.dart';
+import '../../../data/models/reciters_model.dart';
 
 abstract class RadioStates {}
 
@@ -17,4 +17,3 @@ class RadioErrorState extends RadioStates {
   final String errorMessage;
   RadioErrorState({required this.errorMessage});
 }
-

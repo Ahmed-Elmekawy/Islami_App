@@ -1,5 +1,3 @@
-import 'package:islamy/features/home/data/models/sura_model.dart';
-
 class RadioModel {
   final int id;
   final String name;

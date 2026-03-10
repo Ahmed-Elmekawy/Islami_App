@@ -5,7 +5,7 @@ import 'package:islamy/features/home/presentation/manager/radio_bloc/radio_state
 import 'package:just_audio/just_audio.dart';
 import '../../../../../core/networking/dio_helper.dart';
 import '../../../data/models/radio_model.dart';
-import '../../../data/models/reciter_model.dart';
+import '../../../data/models/reciters_model.dart';
 
 class RadioCubit extends Cubit<RadioStates> {
   String? currentUrl;
@@ -45,7 +45,7 @@ class RadioCubit extends Cubit<RadioStates> {
     final response = await DioHelper.getData(
       methodUrl: 'https://www.mp3quran.net/api/v3/reciters',
     );
-    reciters = ReciterResponse.fromJson(response.data).reciters;
+    reciters = RecitersResponse.fromJson(response.data).reciters;
   }
 
   Future<void> playRadio(String url) async {
