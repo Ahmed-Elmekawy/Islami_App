@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:islamy/core/utils/app_colors.dart';
-import 'package:islamy/features/home/data/models/prayer_time_model.dart';
+import 'package:islamy/features/home/data/models/pray_timing_model.dart';
+import 'package:islamy/features/home/presentation/manager/timing_bloc/timing_cubit.dart';
 
 class PrayerTimeCard extends StatelessWidget {
-  final PrayerTimeModel prayerTime;
+  final String prayerName;
+  final Timings timings;
 
-  const PrayerTimeCard({super.key, required this.prayerTime});
+  const PrayerTimeCard({
+    super.key,
+    required this.prayerName,
+    required this.timings,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final cubit = TimingCubit.get(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -24,25 +31,24 @@ class PrayerTimeCard extends StatelessWidget {
         children: [
           FittedBox(
             child: Text(
-              prayerTime.label,
+              prayerName,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+          const SizedBox(height: 4),
+          FittedBox(
+            child: Text(
+              cubit.getPrayerTime(timings, prayerName),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(color: AppColors.white),
+            ),
+          ),
+          const SizedBox(height: 4),
+          FittedBox(
+            child: Text(
+              cubit.getPeriod(timings, prayerName),
               style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-          SizedBox(height: 4,),
-          FittedBox(
-            child: Text(
-              prayerTime.time,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          SizedBox(height: 4,),
-          FittedBox(
-            child: Text(
-              prayerTime.period,
-              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ],

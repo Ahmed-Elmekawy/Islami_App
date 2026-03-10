@@ -10,6 +10,7 @@ import 'features/home/presentation/manager/home_bloc/home_cubit.dart';
 import 'features/home/presentation/manager/quran_bloc/quran_cubit.dart';
 import 'features/home/presentation/manager/radio_bloc/radio_cubit.dart';
 import 'features/home/presentation/manager/sebha_bloc/sebha_cubit.dart';
+import 'features/home/presentation/manager/timing_bloc/timing_cubit.dart';
 import 'my_bloc_observer.dart';
 
 void main() async {
@@ -32,10 +33,13 @@ class Islamy extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeCubit()),
-        BlocProvider(create: (context) => SebhaCubit()),
         BlocProvider(create: (context) => QuranCubit()..loadQuranData()),
         BlocProvider(create: (context) => HadithCubit()..loadHadithsFile()),
+        BlocProvider(create: (context) => SebhaCubit()),
         BlocProvider(create: (context) => RadioCubit()..getRadiosAndReciters()),
+        BlocProvider(
+          create: (context) => TimingCubit()..getPrayTiming(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -16,8 +16,9 @@ class DioHelper {
   static Future<Response> getData({
     required String methodUrl,
     String lang = 'ar',
+    Map<String, dynamic>? queryParameters,
   }) async {
     dio.options.headers = {'lang': lang, 'Content-Type': 'application/json'};
-    return await dio.get(methodUrl);
+    return await dio.get(methodUrl, queryParameters: queryParameters);
   }
 }
