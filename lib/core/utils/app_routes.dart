@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/azkar_details/presentation/views/azkar_details_view.dart';
 import '../../features/hadith_details/presentation/views/hadith_details_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
@@ -23,6 +24,7 @@ abstract class AppRoutes {
       surahDetails: (_) => SuraDetailsView(),
       hadithDetails: (_) => HadithDetailsView(),
       reciterDetails: (_) => ReciterDetailsView(),
+      azkarDetails: (_) => AzkarDetailsView(),
     };
   }
 }

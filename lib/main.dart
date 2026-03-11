@@ -6,6 +6,7 @@ import 'package:islamy/core/utils/app_routes.dart';
 import 'package:islamy/core/utils/shared_pref_helper.dart';
 import 'package:islamy/features/home/presentation/manager/hadith_bloc/hadith_cubit.dart';
 import 'core/networking/dio_helper.dart';
+import 'features/home/presentation/manager/azkar_bloc/azkar_cubit.dart';
 import 'features/home/presentation/manager/home_bloc/home_cubit.dart';
 import 'features/home/presentation/manager/quran_bloc/quran_cubit.dart';
 import 'features/home/presentation/manager/radio_bloc/radio_cubit.dart';
@@ -37,9 +38,8 @@ class Islamy extends StatelessWidget {
         BlocProvider(create: (context) => HadithCubit()..loadHadithsFile()),
         BlocProvider(create: (context) => SebhaCubit()),
         BlocProvider(create: (context) => RadioCubit()..getRadiosAndReciters()),
-        BlocProvider(
-          create: (context) => TimingCubit()..getPrayTiming(),
-        ),
+        BlocProvider(create: (context) => TimingCubit()..getPrayTiming()),
+        BlocProvider(create: (context) => AzkarCubit()..getAzkar()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -20,6 +20,12 @@ abstract class AppImages {
   static const String timingBg = '${path}timing_bg.png';
   static const String morningAzkar = '${path}morning_azkar.png';
   static const String eveningAzkar = '${path}evening_azkar.png';
+  static const String postPrayerAzkar = '${path}Post-Prayer.png';
+  static const String tasbihAzkar = '${path}Tasbih.png';
+  static const String sleepingAzkar = '${path}sleeping.png';
+  static const String wakingUpAzkar = '${path}waking_up.png';
+  static const String quranicAzkar = '${path}Quranic.png';
+  static const String prophetsAzkar = '${path}Prophets .png';
   static const String kabbaIntro = '${path}kabba.png';
   static const String leftCorner = '${path}left_corner .png';
   static const String rightCorner = '${path}right_corner.png';
