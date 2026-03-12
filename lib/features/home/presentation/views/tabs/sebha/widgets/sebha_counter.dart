@@ -13,18 +13,26 @@ class SebhaCounter extends StatelessWidget {
     return BlocBuilder<SebhaCubit, SebhaStates>(
       builder: (context, state) {
         SebhaCubit cubit = SebhaCubit.get(context);
+        double screenWidth = context.screenWidth;
+        double screenHeight = context.screenHeight;
+        double baseSize = screenWidth * 0.8;
+        if (baseSize > screenHeight * 0.4) {
+          baseSize = screenHeight * 0.4;
+        }
+
         return GestureDetector(
           onTap: cubit.onSebhaClick,
+          behavior: HitTestBehavior.opaque,
           child: Stack(
             alignment: Alignment.center,
             clipBehavior: Clip.none,
             children: [
               Positioned(
-                top: -context.screenHeight * 0.1,
-                right: context.screenWidth * 0.23,
+                top: -baseSize * 0.25,
+                right: baseSize * 0.28,
                 child: Image.asset(
                   AppImages.headOfSebeha,
-                  height: context.screenHeight * 0.12,
+                  height: baseSize * 0.3,
                 ),
               ),
               AnimatedRotation(
@@ -32,21 +40,29 @@ class SebhaCounter extends StatelessWidget {
                 duration: const Duration(milliseconds: 300),
                 child: Image.asset(
                   AppImages.sebha,
-                  width: context.screenWidth * 0.85,
+                  width: baseSize,
+                  height: baseSize,
                 ),
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    cubit.azkar[cubit.index],
-                    style: Theme.of(context).textTheme.headlineMedium,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: baseSize * 0.1),
+                    child: Text(
+                      cubit.azkar[cubit.index],
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontSize: baseSize * 0.1,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: baseSize * 0.04),
                   Text(
                     '${cubit.counter}',
-                    style: Theme.of(context).textTheme.headlineLarge,
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          fontSize: baseSize * 0.14,
+                        ),
                   ),
                 ],
               ),
