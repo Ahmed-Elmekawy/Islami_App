@@ -11,35 +11,45 @@ class PrayTimingHeader extends StatelessWidget {
     final gregorian = date.gregorian;
     final hijri = date.hijri;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _DateColumn(
-          line1: "${gregorian.day} ${gregorian.month.en}",
-          line2: gregorian.year,
+        Expanded(
+          child: _DateColumn(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            line1: "${gregorian.day} ${gregorian.month.en},",
+            line2: gregorian.year,
+          ),
         ),
-        Column(
-          children: [
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                "Pray Time",
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.secondary.withValues(alpha: 0.7),
+        Expanded(
+          child: Column(
+            children: [
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  "Pray Time",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: AppColors.secondary.withValues(alpha: 0.7),
+                  ),
                 ),
               ),
-            ),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                gregorian.weekday.en,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.secondary.withValues(alpha: 0.7),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  gregorian.weekday.en,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: AppColors.secondary.withValues(alpha: 0.7),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        _DateColumn(line1: "${hijri.day} ${hijri.month.en}", line2: hijri.year),
+        Expanded(
+          child: _DateColumn(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            line1: "${hijri.day} ${hijri.month.en},",
+            line2: hijri.year,
+          ),
+        ),
       ],
     );
   }
@@ -48,12 +58,18 @@ class PrayTimingHeader extends StatelessWidget {
 class _DateColumn extends StatelessWidget {
   final String line1;
   final String line2;
+  final CrossAxisAlignment crossAxisAlignment;
 
-  const _DateColumn({required this.line1, required this.line2});
+  const _DateColumn({
+    required this.line1,
+    required this.line2,
+    required this.crossAxisAlignment,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: crossAxisAlignment,
       mainAxisSize: MainAxisSize.min,
       children: [
         FittedBox(
