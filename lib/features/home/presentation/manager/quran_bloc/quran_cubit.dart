@@ -13,6 +13,7 @@ class QuranCubit extends Cubit<QuranStates> {
   List<SuraModel> filteredSuras = [];
   List<SuraModel> recentSuras = [];
   List<String> mostRecentSurasNumbers = [];
+  final TextEditingController searchController = TextEditingController();
 
   void loadQuranData() {
     emit(QuranDataLoadingState());
@@ -41,7 +42,6 @@ class QuranCubit extends Cubit<QuranStates> {
               sura.nameEnglish.toLowerCase().contains(searchText.toLowerCase()),
         )
         .toList();
-
     _emitQuranDataSuccessState();
   }
 
@@ -67,8 +67,8 @@ class QuranCubit extends Cubit<QuranStates> {
 
       await SharedPrefHelper.saveData('mostRecently', mostRecentSurasNumbers);
       emit(MostRecentlyItemSuccessState());
-      _loadMostRecently();
-      _emitQuranDataSuccessState();
+      loadQuranData();
+      _searchClear();
     } catch (e) {
       emit(
         MostRecentlyItemErrorState(errorMessage: 'Error saving recent sura'),
@@ -83,5 +83,10 @@ class QuranCubit extends Cubit<QuranStates> {
         recentSuras: recentSuras,
       ),
     );
+  }
+
+  void _searchClear() {
+    searchController.clear();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 }

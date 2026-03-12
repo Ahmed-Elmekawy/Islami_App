@@ -21,8 +21,6 @@ class QuranDataErrorState extends QuranStates {
   QuranDataErrorState({required this.errorMessage});
 }
 
-class MostRecentlyItemLoadingState extends QuranStates {}
-
 class MostRecentlyItemSuccessState extends QuranStates {}
 
 class MostRecentlyItemErrorState extends QuranStates {

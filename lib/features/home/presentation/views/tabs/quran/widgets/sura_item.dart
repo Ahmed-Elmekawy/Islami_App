@@ -17,12 +17,12 @@ class SuraItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 0.5 * kDefaultPadding),
       child: InkWell(
         onTap: () {
-          QuranCubit.get(context).setMostRecentlyItem(suraModel);
           Navigator.pushNamed(
             context,
             AppRoutes.surahDetails,
             arguments: suraModel,
           );
+          QuranCubit.get(context).setMostRecentlyItem(suraModel);
         },
         child: Row(
           children: [

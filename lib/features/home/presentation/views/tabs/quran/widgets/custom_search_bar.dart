@@ -10,9 +10,11 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = QuranCubit.get(context);
     return TextField(
+      controller: cubit.searchController,
       onChanged: (value) {
-        QuranCubit.get(context).loadFilteredSuras(value.trim());
+        cubit.loadFilteredSuras(value.trim());
       },
       keyboardType: TextInputType.text,
       cursorColor: AppColors.white,

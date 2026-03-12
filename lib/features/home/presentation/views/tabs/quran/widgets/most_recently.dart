@@ -16,9 +16,13 @@ class MostRecently extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: kDefaultPadding),
       child: BlocBuilder<QuranCubit, QuranStates>(
+        buildWhen: (previous, current) =>
+            current is QuranDataSuccessState ||
+            current is QuranDataLoadingState ||
+            current is QuranDataErrorState,
         builder: (context, state) {
           if (state is QuranDataLoadingState) {
-            return LoadingIndicator();
+            return const LoadingIndicator();
           }
           if (state is QuranDataSuccessState && state.recentSuras.isNotEmpty) {
             return Column(
