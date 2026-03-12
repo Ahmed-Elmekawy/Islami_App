@@ -8,25 +8,14 @@ import '../../../home/data/models/reciters_model.dart';
 import '../../../home/presentation/manager/radio_bloc/radio_cubit.dart';
 import '../../../home/presentation/manager/radio_bloc/radio_states.dart';
 
-class ReciterDetailsView extends StatefulWidget {
+class ReciterDetailsView extends StatelessWidget {
   const ReciterDetailsView({super.key});
 
   @override
-  State<ReciterDetailsView> createState() => _ReciterDetailsViewState();
-}
-
-class _ReciterDetailsViewState extends State<ReciterDetailsView> {
-  late ReciterModel reciter;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    reciter = ModalRoute.of(context)!.settings.arguments as ReciterModel;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final reciter = ModalRoute.of(context)!.settings.arguments as ReciterModel;
     final moshaf = reciter.moshaf[0];
+
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {

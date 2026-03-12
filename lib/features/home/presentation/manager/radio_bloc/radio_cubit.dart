@@ -11,13 +11,14 @@ class RadioCubit extends Cubit<RadioStates> {
   String? currentUrl;
   List<RadioModel> radios = [];
   List<ReciterModel> reciters = [];
+  bool isRadioSelected = true;
   final AudioPlayer audioPlayer = AudioPlayer();
 
   RadioCubit() : super(RadioInitialState()) {
     audioPlayer.playerStateStream.listen((playerState) {
       if (playerState.processingState == ProcessingState.completed) {
         currentUrl = null;
-        emit(RadioSuccessState(radios: radios, reciters: reciters));
+        emit(RadioSuccessState(radios: radios, reciters: reciters, isRadioSelected: isRadioSelected));
       }
     });
   }
@@ -28,7 +29,7 @@ class RadioCubit extends Cubit<RadioStates> {
     emit(RadioLoadingState());
     try {
       await Future.wait([_getRadios(), _getReciters()]);
-      emit(RadioSuccessState(radios: radios, reciters: reciters));
+      emit(RadioSuccessState(radios: radios, reciters: reciters, isRadioSelected: isRadioSelected));
     } catch (e) {
       emit(RadioErrorState(errorMessage: e.toString()));
     }
@@ -49,7 +50,6 @@ class RadioCubit extends Cubit<RadioStates> {
   }
 
   Future<void> playRadio(String url) async {
-    emit(RadioLoadingState());
     try {
       if (currentUrl == url) {
         await stopAudio();
@@ -58,7 +58,7 @@ class RadioCubit extends Cubit<RadioStates> {
         await audioPlayer.setUrl(url);
         audioPlayer.play();
         currentUrl = url;
-        emit(RadioSuccessState(radios: radios, reciters: reciters));
+        emit(RadioSuccessState(radios: radios, reciters: reciters, isRadioSelected: isRadioSelected));
       }
     } catch (e) {
       emit(RadioErrorState(errorMessage: "Could not play radio"));
@@ -68,7 +68,12 @@ class RadioCubit extends Cubit<RadioStates> {
   Future<void> stopAudio() async {
     await audioPlayer.stop();
     currentUrl = null;
-    emit(RadioSuccessState(radios: radios, reciters: reciters));
+    emit(RadioSuccessState(radios: radios, reciters: reciters, isRadioSelected: isRadioSelected));
+  }
+
+  void toggleRadioOption(bool isSelected) {
+    isRadioSelected = isSelected;
+    emit(RadioSuccessState(radios: radios, reciters: reciters, isRadioSelected: isRadioSelected));
   }
 
   bool isPlaying(String url) => currentUrl == url;
@@ -77,7 +82,7 @@ class RadioCubit extends Cubit<RadioStates> {
 
   void toggleMute() {
     audioPlayer.setVolume(isMuted ? 1 : 0);
-    emit(RadioSuccessState(radios: radios, reciters: reciters));
+    emit(RadioSuccessState(radios: radios, reciters: reciters, isRadioSelected: isRadioSelected));
   }
 
   String getSuraUrl(String server, String suraIndex) {

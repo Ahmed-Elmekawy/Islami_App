@@ -10,7 +10,12 @@ class RadioLoadingState extends RadioStates {}
 class RadioSuccessState extends RadioStates {
   final List<RadioModel> radios;
   final List<ReciterModel> reciters;
-  RadioSuccessState({required this.radios, required this.reciters});
+  final bool isRadioSelected;
+  RadioSuccessState({
+    required this.radios,
+    required this.reciters,
+    required this.isRadioSelected,
+  });
 }
 
 class RadioErrorState extends RadioStates {
