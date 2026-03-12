@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../../../core/constants.dart';
 import '../../../../../../../core/utils/app_colors.dart';
-import '../../../../manager/timing_bloc/timing_cubit.dart';
 
 class NextPrayIndicator extends StatelessWidget {
   final String nextPrayTime;

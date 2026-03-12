@@ -92,6 +92,7 @@ class TimingCubit extends Cubit<TimingStates> {
       );
       if (compareTime.isAfter(now)) {
         nextPrayerName = name;
+        nextPrayerTime = timeStr;
         break;
       }
     }
