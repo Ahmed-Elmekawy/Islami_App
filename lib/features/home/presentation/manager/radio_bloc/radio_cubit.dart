@@ -49,6 +49,7 @@ class RadioCubit extends Cubit<RadioStates> {
   }
 
   Future<void> playRadio(String url) async {
+    emit(RadioLoadingState());
     try {
       if (currentUrl == url) {
         await stopAudio();
@@ -57,8 +58,8 @@ class RadioCubit extends Cubit<RadioStates> {
         await audioPlayer.setUrl(url);
         audioPlayer.play();
         currentUrl = url;
+        emit(RadioSuccessState(radios: radios, reciters: reciters));
       }
-      emit(RadioSuccessState(radios: radios, reciters: reciters));
     } catch (e) {
       emit(RadioErrorState(errorMessage: "Could not play radio"));
     }
@@ -67,6 +68,7 @@ class RadioCubit extends Cubit<RadioStates> {
   Future<void> stopAudio() async {
     await audioPlayer.stop();
     currentUrl = null;
+    emit(RadioSuccessState(radios: radios, reciters: reciters));
   }
 
   bool isPlaying(String url) => currentUrl == url;
